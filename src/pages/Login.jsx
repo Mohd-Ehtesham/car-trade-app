@@ -19,7 +19,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, e_mail, password);
       console.log("User logged in successfully...");
-      navigate("/");
+      navigate("/cart");
     } catch (error) {
       console.error(error.message);
       setError(error.message); // Display error message

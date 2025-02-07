@@ -11,7 +11,7 @@ export default function BookmarkButton({ carId }) {
       navigate("/login"); // Redirect if not logged in
       return;
     } else {
-      navigate("/cart");
+      navigate("/");
     }
     console.log(`Car ${carId} bookmarked!`);
   }
