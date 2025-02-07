@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import BookmarkButton from "./BookMarkButton";
+import BookmarkButton from "./BookmarkButton";
 
 export default function Cart() {
   const { cartItems } = useSelector((state) => state.cart);
