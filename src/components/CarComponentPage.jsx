@@ -13,6 +13,7 @@ export default function CarComponentPage() {
     dispatch(fetchCars());
   }, [dispatch]);
 
+  console.log(searchedCars);
   if (status === "loading") {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -38,7 +39,7 @@ export default function CarComponentPage() {
       {status === "success" && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {searchedCars.map((car) => (
-            <Car key={car.id} car={car} />
+            <Car key={car._id} car={car} />
           ))}
         </div>
       )}

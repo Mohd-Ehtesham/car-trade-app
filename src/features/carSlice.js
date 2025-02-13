@@ -6,7 +6,7 @@ export const fetchCars = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     const options = {
       method: "GET",
-      url: "https://car-data.p.rapidapi.com/cars",
+      url: "https://cartrade-backend.onrender.com/cars/allCars",
       params: {
         limit: "10",
         page: "0",
@@ -18,8 +18,8 @@ export const fetchCars = createAsyncThunk(
     };
     try {
       const response = await axios.request(options);
-      console.log(response.data);
-      return await response.data;
+      console.log(response.data.allCars);
+      return await response.data.allCars;
     } catch (error) {
       return rejectWithValue(
         error.response ? error.response.data : error.message
@@ -31,7 +31,7 @@ export const fetchCars = createAsyncThunk(
 const carSlice = createSlice({
   name: "cars",
   initialState: {
-    allCars: [],
+    cars: [],
     searchedCars: [],
     status: "idle",
     error: null,
@@ -40,10 +40,10 @@ const carSlice = createSlice({
     searchedCars: (state, action) => {
       const query = action.payload.toLowerCase();
       if (!query) {
-        state.searchedCars = state.allCars;
+        state.searchedCars = state.cars;
       } else {
-        state.searchedCars = state.allCars.filter((car) =>
-          car.type.toLowerCase().includes(query)
+        state.searchedCars = state.cars.filter((car) =>
+          car.make.toLowerCase().includes(query)
         );
       }
     },
@@ -55,7 +55,7 @@ const carSlice = createSlice({
       })
       .addCase(fetchCars.fulfilled, (state, action) => {
         state.status = "success";
-        state.allCars = action.payload;
+        state.cars = action.payload;
         state.searchedCars = action.payload;
       })
       .addCase(fetchCars.rejected, (state, action) => {

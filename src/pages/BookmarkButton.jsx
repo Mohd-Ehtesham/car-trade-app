@@ -1,32 +1,30 @@
-import PropTypes from "prop-types";
 import { useAuth } from "../utils/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function BookmarkButton({ carId }) {
+export default function BookmarkButton() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
   function handleBookmark() {
     if (!user) {
-      navigate("/login"); // Redirect if not logged in
+      navigate("/login");
       return;
-    } else {
-      navigate("/");
     }
-    console.log(`Car ${carId} bookmarked!`);
+
+    alert("Car is bookmarked successfully");
+
+    setTimeout(() => {
+      navigate("/");
+      window.location.reload();
+    }, 2000); // ✅ Delay navigation to show toast
   }
 
   return (
     <button
       onClick={handleBookmark}
-      className="px-4 py-2 bg-blue-500 text-white rounded-md"
+      className="px-4 py-2 bg-blue-500 text-white rounded-md hover:cursor-pointer"
     >
       Bookmark
     </button>
   );
 }
-
-// ✅ Add prop validation
-BookmarkButton.propTypes = {
-  carId: PropTypes.string.isRequired, // or PropTypes.number if it's a number
-};

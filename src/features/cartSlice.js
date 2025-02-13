@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const DEFAULT_CAR_PRICE = 1250000; // Set a default price
-
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -12,29 +10,29 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const newCar = action.payload;
-      const existingCar = state.cartItems.find((car) => car.id === newCar.id);
+      const existingCar = state.cartItems.find((car) => car._id === newCar._id);
+
       if (existingCar) {
         existingCar.quantity += 1;
       } else {
-        state.cartItems.push(
-          Object.assign({
-            ...newCar,
-            quantity: 1,
-            price: DEFAULT_CAR_PRICE,
-          })
-        );
+        state.cartItems.push({
+          ...newCar,
+          quantity: 1, // Ensure a new car starts with quantity 1
+        });
       }
       state.totalQuantity += 1;
-      state.totalPrice += DEFAULT_CAR_PRICE;
+      state.totalPrice += newCar.price;
     },
+
     removeFromCart: (state, action) => {
       const id = action.payload;
-      const existingCar = state.cartItems.find((car) => car.id === id);
+      const existingCar = state.cartItems.find((car) => car._id === id);
+
       if (existingCar) {
-        existingCar.quantity -= existingCar.quantity;
-        state.totalPrice = DEFAULT_CAR_PRICE * existingCar.quantity;
-      } else {
-        state.cartItems.filter((car) => car.id !== id);
+        state.totalQuantity -= existingCar.quantity;
+        state.totalPrice -= existingCar.price * existingCar.quantity;
+        // Remove the car if quantity is 1 or less
+        state.cartItems = state.cartItems.filter((car) => car._id !== id);
       }
     },
   },

@@ -4,9 +4,16 @@ import CarComponentPage from "../components/CarComponentPage";
 
 export default function Home() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar */}
       <Navbar />
-      <CarComponentPage />
+
+      {/* Main Content */}
+      <main className="flex-grow w-full px-4 md:px-8 lg:px-16 xl:px-24 mt-25">
+        <CarComponentPage />
+      </main>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

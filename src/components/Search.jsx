@@ -27,7 +27,7 @@ export default function Search() {
         type="text"
         id="search"
         name="search"
-        placeholder="Search"
+        placeholder="Enter make of car"
         className="border-b w-72"
         value={query}
         onChange={(event) => setQuery(event.target.value)}

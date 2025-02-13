@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import { useEffect } from "react";
 import { signOut } from "firebase/auth";
 import auth from "./utils/firebase";
+import CarDetailPage from "./pages/CarDetailPage";
 
 export default function App() {
   useEffect(function () {
@@ -27,9 +28,11 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/car/:id" element={<CarDetailPage />} />
         </Routes>
       </BrowserRouter>
     </Provider>
